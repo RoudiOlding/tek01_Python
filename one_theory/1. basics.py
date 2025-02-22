@@ -234,3 +234,163 @@ i = 1
 while i < 6:
     print(i)
     i += 1
+
+## 9. FUNCTIONS
+def my_function(fname):
+    print(f"Welcome {fname}, let's go to another day learning Python!")
+
+my_function("Sae")
+
+def fun_identificacion(fname, flast, fage):
+    print(f"Hello {fname} {flast}." + "\n" + f"It's looks like you are {fage} years old.")
+
+fun_identificacion("Sae", "Olding", 15)
+
+def show_shopList(items):
+    for index, item in enumerate(items): # enumerate() function, create an index
+        print(f"{index + 1}. {item}")
+
+items = ['Airpods', 'Bottle', 'Brush', 'Lamp']
+show_shopList(items)
+
+def add_function(x, y):
+    return x + y
+
+print(add_function(x=5, y=3))
+
+def first_recurstion(x):
+    if x > 0:
+        result = x + first_recurstion(x - 1)
+        print(result)
+    else:
+        result = 0
+    return result
+
+print("\nRecursion Example Results")
+first_recurstion(6)
+
+## 10. LAMBA
+tripleAdd = lambda x, y, z: x + y + z
+print("\n" + f"The result is {tripleAdd(5, 6, 2)}")
+
+## 11. CLASSES
+
+class Simple:
+    x = 8
+
+s1 = Simple()
+print(s1.x)
+
+class Person:
+    def __init__(self, name, age): # __init__ function, constructor
+        self.name = name
+        self.age = age
+
+    def __str__(self):
+        return f"Hello, my name is {self.name} and I am {self.age} years old."
+
+    def scream(self):
+        print("AAAA")
+
+p1 = Person("John", 36)
+print(p1.name)
+print(p1.age)
+p1.age = 30
+print(p1)
+p1.scream()
+
+## 12. TYPE CASTING
+var1int = 100 # int
+var2float = 25.5 # float
+floatVar = var1int + var2float # float
+print(floatVar)
+print(type(floatVar))   # float
+
+"Here's go an explicit type casting"
+num_string = "100"
+num_int = 25
+
+print(f'Data type of the num_string before the cast: {type(num_string)}')   # str
+num_string = int(num_string) # casting
+
+print(f'Data type of the num_string after the cast: {type(num_string)}')   # int
+
+num_sum = num_string + num_int
+print(num_sum)
+print(type(num_sum))   # int
+
+## 13. Exceptions
+
+try:
+    numerator = 10
+    denominator = 0
+    result = numerator / denominator
+    print(result)
+
+except:
+    print("Error: Denominator can be 0")
+
+# program to print the reciprocal of even numbers
+
+try:
+    num = int(input("Enter a number: "))
+    assert num % 2 == 0
+except:
+    print("Not an even number!")
+else:
+    reciprocal = 1/num
+    print(reciprocal)
+
+try:
+    numerator = 10
+    denominator = 0
+    result = numerator / denominator
+    print(result)
+
+except:
+    print("Error: Denominator can be 0")
+
+finally:
+    print("Finally block is executed")
+
+## 14. TUPLES
+# Tuple
+fruits = ("apple", "banana", "cherry") # immutable // only strings
+generalTuple = (1, 2, 3, 4, 5, 'a', 'b', 'c', 'd', 'e') # mixed data types
+print(fruits)
+print(generalTuple)
+
+# Access Tuple
+print(fruits[0])
+print(fruits[1:3])
+
+## 15. SETS
+# Set
+fruits = {"apple", "banana", "cherry"}
+print(fruits)
+
+# Access Set
+for x in fruits:
+    print(x)
+
+# Add Set
+fruits.add("orange")
+print(fruits)
+
+# Remove Set
+fruits.remove("banana")
+print(fruits)
+
+# Clear Set
+fruits.clear()
+print(fruits)
+
+# Union Set
+fruits = {"apple", "banana", "cherry"}
+vegetables = {"carrot", "potato", "onion"}
+food = fruits.union(vegetables)
+print(food)
+
+# Intersection Set
+food2 = fruits.intersection(vegetables)
+print(food)
