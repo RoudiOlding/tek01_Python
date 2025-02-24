@@ -11,7 +11,7 @@ print('Hello to exercise 1')
 number = int(input('Please, give a number: '))
 sum = 0
 
-for x in range(number):
+for x in range(number+1):
     if((x%2) == 0):
         sum+= x
 
@@ -122,4 +122,98 @@ if __name__ == "__main__":
     . View all contacts.
     . Search for a contact by name.
 -- Concepts: Dictionaries, Functions, Loops
+
+def addContact(fbook, fname, fnumber):
+    fbook['name'].append(fname)
+    fbook['phone'].append(fnumber)
+    print(f'Name: {fname} with number {fnumber}... Add sucessfully!')
+
+def viewAllContacts(fcontact):
+    if not fcontact['name']:  # Check if the 'name' list is empty
+        print('You don\'t have any contacts yet!')
+    else:
+        for i in range(len(fcontact['name'])):
+            print(f"Contact {i + 1}. -- Name: {fcontact['name'][i]}, Phone: {fcontact['phone'][i]}")
+
+def searchContact(fcontact, fname):
+    for i in range(len(fcontact['name'])):
+        if(fcontact['name'][i] == fname):
+            print(f"Heres your contact. Name: {fcontact['name'][i]}, Phone: {fcontact['phone'][i]}")
+
+if __name__ == "__main__":
+    # Contact book default
+    contactBook = {
+        'name': [],
+        'phone': [],
+    }
+    print('Welcome to exercise 5')
+    
+    option = 1
+    while option != 4:
+        option = int(input('Choose an option: \n' + '1. Add contact\n' + '2. View all contacts\n' + '3. Search contact\n' + '4. Exit\n'))
+        if option==1:
+            fname = input('Name: ')
+            fphone = input('Phone: ')
+            addContact(contactBook, fname, fphone)
+        elif option==2:
+            viewAllContacts(contactBook)
+        elif option==3:
+            searchContact(contactBook, fname = input('Give me the name: '))
+        elif option == 4:
+            print('Goodbye')
+            option = 4
+        else:
+            print('Invalid option, try again!\n')
+
 '''
+
+'''
+6. Calculator with Error Handling:
+-- Build a basic calculator that performs addition, substraction, multiplication and division.
+-- Implement exception handling to avoid errors like diving zero or invalid inputs.
+-- Concepts: functions, exceptions, conditionals
+'''
+
+def addOp(fx, fy):
+    print(f"Result: {fx + fy}\n")
+
+def subdOp(fx, fy):
+    print(f"Result: {fx - fy}\n")
+
+def multiOp(fx, fy):
+    print(f"Result: {fx * fy}\n")
+
+def divOp(fx, fy):
+        try:
+            print(f"Result: {fx / fy}\n")
+            
+        except ZeroDivisionError:
+            print("You can't divide by zero")
+
+
+if __name__ == "__main__":
+    print("Welcome to exercise 6")
+    option = 0
+    while option != 5:
+        option = int(input('Choose an option: \n' + '1. Add\n' + '2. Sub\n' + '3. Multi\n' + '4. Divisi\n' + '5. Exit\n'))
+        if option==1:
+            x = float(input('Number 1: '))
+            y = float(input('Number 2: '))
+            addOp(x, y)
+        elif option==2:
+            x = float(input('Number 1: '))
+            y = float(input('Number 2: '))
+            subdOp(x, y)
+        elif option==3:
+            x = float(input('Number 1: '))
+            y = float(input('Number 2: '))
+            multiOp(x, y)
+        elif option==4:
+            x = float(input('Number 1: '))
+            y = float(input('Number 2: '))
+            divOp(x, y)
+        elif option==5:
+            print('Goodbye')
+            option = 5
+        else:
+            print('Invalid option, try again!\n')
