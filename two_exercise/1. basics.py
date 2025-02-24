@@ -172,7 +172,7 @@ if __name__ == "__main__":
 -- Build a basic calculator that performs addition, substraction, multiplication and division.
 -- Implement exception handling to avoid errors like diving zero or invalid inputs.
 -- Concepts: functions, exceptions, conditionals
-'''
+
 
 def addOp(fx, fy):
     print(f"Result: {fx + fy}\n")
@@ -217,3 +217,17 @@ if __name__ == "__main__":
             option = 5
         else:
             print('Invalid option, try again!\n')
+'''
+
+## HARD
+'''
+7. To-do List Manager
+-- Create a program that lets users:
+	•	Add tasks.
+	•	Mark tasks as completed.
+	•	Delete tasks.
+	•	View pending and completed tasks.
+-- Use lists and dictionaries to manage tasks and their statuses.
+-- Include error handling (e.g., trying to complete a non-existing task).
+-- Concepts: lists, dictionaries, functions, exceptions, loops.
+'''
