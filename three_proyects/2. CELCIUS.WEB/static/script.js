@@ -2,34 +2,46 @@ const convertToCelsiusButton = document.getElementById('convertToCelsius');
 const convertToFahrenheitButton = document.getElementById('convertToFahrenheit');
 const backToHomeButton = document.getElementById('backToHome');
 const inputTemperature = document.getElementById('inputTemperature');
+const resultDisplay = document.getElementById('result');
+const conversionForm = document.getElementById('conversionForm');
 
-// Initial state: Hide the "Back to Home" button
 backToHomeButton.classList.add('hidden');
 
+// Function to handle conversion
+function handleConversion(url) {
+    const formData = new FormData(conversionForm); // Get form data
+    fetch(url, {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json()) // Parse JSON response
+    .then(data => {
+        // Display the result
+        resultDisplay.textContent = data.result;
+
+        // Hide input and conversion buttons
+        inputTemperature.classList.add('hidden');
+        convertToCelsiusButton.classList.add('hidden');
+        convertToFahrenheitButton.classList.add('hidden');
+
+        // Show "Back to Home" button
+        backToHomeButton.classList.remove('hidden');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+// Add event listeners to the conversion buttons
 convertToCelsiusButton.addEventListener('click', () => {
-    // Hide input and conversion buttons
-    inputTemperature.classList.add('hidden');
-    convertToCelsiusButton.classList.add('hidden');
-    convertToFahrenheitButton.classList.add('hidden');
-
-    // Show "Back to Home" button
-    backToHomeButton.classList.remove('hidden');
-
-    alert('Converted to Celsius!');
+    handleConversion('/convertCelsius');
 });
 
 convertToFahrenheitButton.addEventListener('click', () => {
-    // Hide input and conversion buttons
-    inputTemperature.classList.add('hidden');
-    convertToCelsiusButton.classList.add('hidden');
-    convertToFahrenheitButton.classList.add('hidden');
-
-    // Show "Back to Home" button
-    backToHomeButton.classList.remove('hidden');
-
-    alert('Converted to Fahrenheit!');
+    handleConversion('/convertFahrenheit');
 });
 
+// Add event listener to the "Back to Home" button
 backToHomeButton.addEventListener('click', () => {
     // Show input and conversion buttons
     inputTemperature.classList.remove('hidden');
@@ -39,5 +51,9 @@ backToHomeButton.addEventListener('click', () => {
     // Hide "Back to Home" button
     backToHomeButton.classList.add('hidden');
 
-    alert('Going back to home!');
+    // Clear the input field
+    inputTemperature.value = '';
+
+    // Clear and hide the result
+    resultDisplay.textContent = '';
 });

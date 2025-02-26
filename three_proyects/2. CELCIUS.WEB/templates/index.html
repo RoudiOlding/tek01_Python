@@ -15,12 +15,13 @@
         </ol>
     </div>
     <div class="containerTwo">
-        <form action="/convert">
-            <input type="number" id="inputTemperature" placeholder="Set the Temperature" required>
+        <form id="conversionForm">
+            <input type="number" name="Temperature" id="inputTemperature" placeholder="Set the Temperature" required>
             <button type="button" id="convertToCelsius">Convert to Celsius</button>
             <button type="button" id="convertToFahrenheit">Convert to Fahrenheit</button>
         </form>
         <button id="backToHome">Back to Home</button>
+        <p id="result"></p> <!-- Add this to display the result -->
     </div>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
