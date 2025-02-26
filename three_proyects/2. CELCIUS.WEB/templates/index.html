@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Exchange: Web</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to "Temperature Exchange"</h1>
+        <ol>
+            <li>Convert Celcius to Fahrenheit</li>
+            <li>Convert Fahrenheit to Celcius</li>
+        </ol>
+    </div>
+    <div class="containerTwo">
+        <form action="/convert">
+            <input type="number" id="inputTemperature" placeholder="Set the Temperature" required>
+            <button type="button" id="convertToCelsius">Convert to Celsius</button>
+            <button type="button" id="convertToFahrenheit">Convert to Fahrenheit</button>
+        </form>
+        <button id="backToHome">Back to Home</button>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
