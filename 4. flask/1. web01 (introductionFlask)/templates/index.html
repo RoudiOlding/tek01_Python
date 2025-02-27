@@ -3,9 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title> {{ data.tittle }}</title>
 </head>
 <body>
-    <h1>Hello world!</h1>
+    <h1>{{ data.welcome }}</h1>
+    {% if data.quantity_courses > 0 %}
+    <ul>
+        {% for i in data.courses %}
+        <li>{{ i }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <h2>No existen cursos</h2>
+    {% endif %}
 </body>
 </html>
