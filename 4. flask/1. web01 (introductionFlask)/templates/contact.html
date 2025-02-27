@@ -1,0 +1,11 @@
+{% extends './base.html' %}
+
+{% block title %} 
+    {{ data.title }} 
+{% endblock %}
+
+{% block body %} 
+    <h1>Name: {{ data.name }}</h1>
+    <h2>Age: {{ data.age }}</h2>
+    <h2>Favorite Band: {{ data.favBand }}</h2>
+{% endblock %}

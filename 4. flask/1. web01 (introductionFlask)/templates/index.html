@@ -1,20 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> {{ data.tittle }}</title>
-</head>
-<body>
+{% extends './base.html' %}
+
+{% block title %} 
+    {{ data.title }} 
+{% endblock %}
+
+{% block body %} 
     <h1>{{ data.welcome }}</h1>
     {% if data.quantity_courses > 0 %}
-    <ul>
-        {% for i in data.courses %}
-        <li>{{ i }}</li>
-        {% endfor %}
-    </ul>
-    {% else %}
-    <h2>No existen cursos</h2>
+        <ul>
+            {% for i in data.courses %}
+            <li>{{ i }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <h2>No existen cursos</h2>
     {% endif %}
-</body>
-</html>
+{% endblock %}

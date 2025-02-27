@@ -7,12 +7,22 @@ app = Flask(__name__)
 def home():
     cursos = ['PHP', 'PYTHON', 'Java', 'Kotlin', 'Dart', 'JavaScript']
     data = {
-        "tittle": 'Index',
+        "title": 'Index',
         "welcome": 'Hi!',
         'courses': cursos,
         'quantity_courses': len(cursos)
     }
     return render_template('index.html', data=data)
+
+@app.route('/contact/<name>/<int:age>/<favBand>')
+def contact(name, age, favBand):
+    data = {
+        'title': 'Index',
+        'name': name,
+        'age': age,
+        'favBand': favBand
+    }
+    return render_template('contact.html', data=data)
 
 if __name__ == '__main__':
     app.run(debug=True)
