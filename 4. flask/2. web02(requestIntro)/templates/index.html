@@ -1,9 +1,16 @@
 {% extends './base.html' %}
 
 {% block title %}
-    You
+    Python: Method Post
 {% endblock %}
 
 {% block body %}
-    Hello world!
+    <h3>Hey Folks, Please Fill out this Form</h3> 
+	<form action = "/passing" method = "POST"> 
+		<p>Name <input type = "text" name = "name" /></p> 
+		<p>Email <input type = "email" name = "email" /></p> 
+		<p>Phone Num <input type = "text" name = "phone" /></p>
+		<p>Favorite Game <input type = "text" name = "game"></p>
+		<p><input type = "submit" value = "Submit" /></p> 
+	</form> 
 {% endblock %}
