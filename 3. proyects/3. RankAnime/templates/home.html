@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Anime Ranking</h2>
+    <a href="{{ url_for('add_anime') }}" class="btn btn-primary">Add Anime</a>
+    <ul>
+        {% for anime in animes %}
+            <li>
+                <img src="{{ anime.photo_url }}" alt="{{ anime.name }}" width="100">
+                {{ anime.name }} (Position: {{ anime.position }})
+                <a href="{{ url_for('move_up', anime_id=anime.id) }}">⬆️</a>
+                <a href="{{ url_for('move_down', anime_id=anime.id) }}">⬇️</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
