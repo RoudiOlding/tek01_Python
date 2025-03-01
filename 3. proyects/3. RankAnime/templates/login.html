@@ -1,19 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Login</h2>
-    <form method="POST" action="{{ url_for('login') }}">
-        {{ form.hidden_tag() }}
-        <div class="form-group">
-            {{ form.username_or_email.label }}<br>
-            {{ form.username_or_email(size=32, class="form-control") }}<br>
-        </div>
-        <div class="form-group">
-            {{ form.password.label }}<br>
-            {{ form.password(size=32, class="form-control") }}<br>
-        </div>
-        <div class="form-group">
-            {{ form.submit(class="btn btn-primary") }}
-        </div>
-    </form>
+    <div class="form-container">
+        <h2>Login</h2>
+        <form method="POST" action="{{ url_for('login') }}">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.username_or_email.label }}<br>
+                {{ form.username_or_email(size=32, class="form-control") }}<br>
+            </div>
+            <div class="form-group">
+                {{ form.password.label }}<br>
+                {{ form.password(size=32, class="form-control") }}<br>
+            </div>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
+        <p class="text-center mt-3">Don't have an account? <a href="{{ url_for('register') }}" class="btn btn-secondary">Register</a></p>
+    </div>
 {% endblock %}

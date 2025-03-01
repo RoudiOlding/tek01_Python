@@ -1,16 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Anime Ranking</h2>
-    <a href="{{ url_for('add_anime') }}" class="btn btn-primary">Add Anime</a>
-    <ul>
+    <div class="text-center">
+        <h2>Anime Ranking</h2>
+        <a href="{{ url_for('add_anime') }}" class="btn btn-primary">Add Anime</a>
+        <a href="{{ url_for('logout') }}" class="btn btn-danger">Log Out</a>
+    </div>
+    <div class="anime-list">
         {% for anime in animes %}
-            <li>
-                <img src="{{ anime.photo_url }}" alt="{{ anime.name }}" width="100">
-                {{ anime.name }} (Position: {{ anime.position }})
-                <a href="{{ url_for('move_up', anime_id=anime.id) }}">⬆️</a>
-                <a href="{{ url_for('move_down', anime_id=anime.id) }}">⬇️</a>
-            </li>
+            <div class="anime-card">
+                <img src="{{ anime.photo_url }}" alt="{{ anime.name }}">
+                <h3>{{ anime.name }}</h3>
+                <p>Position: {{ anime.position }}</p>
+                <div class="btn-group">
+                    <a href="{{ url_for('move_up', anime_id=anime.id) }}">⬆️</a>
+                    <a href="{{ url_for('move_down', anime_id=anime.id) }}">⬇️</a>
+                </div>
+            </div>
         {% endfor %}
-    </ul>
+    </div>
 {% endblock %}

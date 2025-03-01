@@ -34,6 +34,7 @@ class Anime(db.Model):
     name = db.Column(db.String(100), nullable=False)
     photo_url = db.Column(db.String(200), nullable=False)
     position = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # Link to User
 
     def __repr__(self):
         return f'<Anime {self.name}>'
@@ -67,7 +68,7 @@ def load_user(user_id):
 @app.route('/')
 @login_required
 def home():
-    animes = Anime.query.order_by(Anime.position).all()
+    animes = Anime.query.filter_by(user_id=current_user.id).order_by(Anime.position).all()
     return render_template('home.html', animes=animes)
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -98,7 +99,12 @@ def register():
 def add_anime():
     form = AnimeForm()
     if form.validate_on_submit():
-        new_anime = Anime(name=form.name.data, photo_url=form.photo_url.data, position=Anime.query.count() + 1)
+        new_anime = Anime(
+            name=form.name.data,
+            photo_url=form.photo_url.data,
+            position=Anime.query.filter_by(user_id=current_user.id).count() + 1,
+            user_id=current_user.id  # Assign to the current user
+        )
         db.session.add(new_anime)
         db.session.commit()
         return redirect(url_for('home'))
@@ -107,9 +113,9 @@ def add_anime():
 @app.route('/move_up/<int:anime_id>')
 @login_required
 def move_up(anime_id):
-    anime = Anime.query.get_or_404(anime_id)
+    anime = Anime.query.filter_by(id=anime_id, user_id=current_user.id).first_or_404()
     if anime.position > 1:
-        anime_above = Anime.query.filter_by(position=anime.position - 1).first()
+        anime_above = Anime.query.filter_by(position=anime.position - 1, user_id=current_user.id).first()
         anime_above.position += 1
         anime.position -= 1
         db.session.commit()
@@ -118,13 +124,20 @@ def move_up(anime_id):
 @app.route('/move_down/<int:anime_id>')
 @login_required
 def move_down(anime_id):
-    anime = Anime.query.get_or_404(anime_id)
-    anime_below = Anime.query.filter_by(position=anime.position + 1).first()
+    anime = Anime.query.filter_by(id=anime_id, user_id=current_user.id).first_or_404()
+    anime_below = Anime.query.filter_by(position=anime.position + 1, user_id=current_user.id).first()
     if anime_below:
         anime_below.position -= 1
         anime.position += 1
         db.session.commit()
     return redirect(url_for('home'))
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('You have been logged out.', 'success')
+    return redirect(url_for('login'))
 
 # Create tables when the app starts
 if __name__ == '__main__':
