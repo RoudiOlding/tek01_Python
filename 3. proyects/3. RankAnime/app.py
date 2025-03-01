@@ -9,13 +9,14 @@ from werkzeug.security import generate_password_hash, check_password_hash
 app = Flask(__name__)
 
 # PostgreSQL connection string
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://anime_user:anime_password@localhost/anime_ranking'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://anime_user:anime_password@localhost/anime_ranking' #anime_user is  user and then password
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'your-secret-key'  # Required for Flask-WTF and Flask-Login
 
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
-login_manager.login_view = 'login'
+login_manager.login_view = 'login' # Specifies the route (/login) where users will be redirected if they 
+# ... try to access a protected page without logging in.
 
 # User Model
 class User(db.Model, UserMixin):
@@ -128,5 +129,6 @@ def move_down(anime_id):
 # Create tables when the app starts
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()
+        db.create_all() # When you run db.create_all(), Flask-SQLAlchemy checks the models (User and Anime) 
+        # and creates the corresponding tables in the database if they don’t already exist.
     app.run(debug=True)
